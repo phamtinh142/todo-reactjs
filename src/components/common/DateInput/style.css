@@ -1,0 +1,19 @@
+.date-input {
+  display: block;
+  min-height: 32px;
+  font-size: 14px;
+  width: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid #6c757d;
+  margin: 2px 0px;
+  padding: 0.375rem 0.75rem;
+  background-color: #fff;
+}
+
+.react-datepicker {
+  width: 100%;
+}
+
+.date-input:focus {
+  outline: none;
+}

@@ -1,0 +1,23 @@
+.todo-item {
+  margin-top: 10px;
+}
+
+.todo-item .item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border: 1px solid #000;
+}
+
+.todo-item .item .button-group .button-detail {
+  margin-right: 5px;
+}
+
+.todo-item .detail {
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 20px;
+}
