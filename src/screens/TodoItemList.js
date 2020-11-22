@@ -14,8 +14,8 @@ const TodoItem = (props) => {
   } = props;
 
   const {
-    showDetailTask,
-    removeTask,
+    doShowDetailTask,
+    doRemoveTask,
     onSelectionTask,
     doUpdateTask,
   } = useContext(TodoContext);
@@ -35,14 +35,14 @@ const TodoItem = (props) => {
             color="aqua"
             size="small"
             className="button-detail"
-            onClick={() => showDetailTask(data.id)}
+            onClick={() => doShowDetailTask(data.id)}
           >
             Detail
           </Button>
           <Button
             color="red"
             size="small"
-            onClick={() => removeTask(data.id)}
+            onClick={() => doRemoveTask(data.id)}
           >
             Remove
           </Button>
@@ -52,6 +52,7 @@ const TodoItem = (props) => {
         data.isShow && (
           <div className="detail">
             <TaskForm
+              type="Update"
               onChangeValue={(value) => doUpdateTask({
                 id: data.id,
                 ...value

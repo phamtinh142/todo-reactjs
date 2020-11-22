@@ -9,7 +9,6 @@ import {
   SelectInput,
   DateInput,
 } from '../../common';
-import useInput from '../../../hooks/useInput';
 
 const TaskForm = (props) => {
   const {
@@ -25,29 +24,43 @@ const TaskForm = (props) => {
   const [dueDateError, setDueDateError] = useState('');
 
   const [dueDate, setDueDate] = useState(defaultDueDate);
-  const taskName = useInput(defaultTaskName);
-  const description = useInput(defaultDescription);
-  const piority = useInput(defaultPiority);
+  const [taskName, setTaskName] = useState(defaultTaskName);
+  const [description, setDescription] = useState(defaultDescription);
+  const [piority, setPiority] = useState(defaultPiority);
 
-  const doSubmitForm = async () => {
-    // if (taskName.value === '') {
-    //   await setTaskNameError('Not Empty')
-    // }
-    // if (dueDate < new Date()) {
-    //   await setDueDateError('due date error')
-    // }
-    // console.log(`------- test ------- `);
-    // console.log('taskNameError: ', taskNameError);
-    // console.log('dueDateError: ', dueDateError);
-    // console.log(`------- test ------- `);
-    if (taskNameError === '' || dueDateError === '') {
+  const doSubmitForm = () => {
+    let isError = false;
+
+    if (taskName === '') {
+      setTaskNameError('Task title​ is a required field!')
+      isError = true;
+    } else {
+      setTaskNameError('');
+    }
+
+    if ((dueDate + 24 * 60 * 60 * 1000) < new Date().getTime()) {
+      setDueDateError('Do not accept past days!')
+      isError = true
+    } else {
+      setDueDateError('');
+    }
+
+    if (!isError) {
       const value = {
-        taskName: taskName.value,
-        description: description.value,
-        piority: piority.value,
+        taskName,
+        description,
+        piority,
         dueDate,
       }
       onChangeValue(value);
+      if (type === 'Add') {
+        setTaskName('');
+        setDescription('');
+        setPiority('1');
+        setDueDate(new Date().getTime());
+        setTaskNameError('');
+        setDueDateError('');
+      }
     }
   }
 
@@ -56,17 +69,20 @@ const TaskForm = (props) => {
       <TextInput
         placeholder="Add new task..."
         error={taskNameError}
-        {...taskName}
+        value={taskName}
+        onChange={(event) => setTaskName(event.target.value)}
       />
       <TextArea
         label="Description"
         rows={5}
-        {...description}
+        value={description}
+        onChange={(event) => setDescription(event.target.value)}
       />
       <div className="group-input">
         <SelectInput
           label="Piority"
-          {...piority}
+          value={piority}
+          onChange={(event) => setPiority(event.target.value)}
         >
           <option value="0">Low</option>
           <option defaultValue value="1">Default</option>

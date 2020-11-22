@@ -1,7 +1,10 @@
 .input-wrapper {
   padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   margin: 5px 0px;
   width: 100%;
+  min-height: 75px;
 }
 
 .input-group {

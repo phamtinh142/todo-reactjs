@@ -8,14 +8,14 @@ function getTasks() {
   }
 }
 
-function saveValue(value) {
+function saveTasks(value) {
   localStorage.setItem('todos', JSON.stringify(value));
 }
 
 function createTask(value) {
   let todoList = getTasks();
   todoList.push(value);
-  saveValue(todoList);
+  saveTasks(todoList);
   return todoList;
 }
 
@@ -27,37 +27,35 @@ function updateTask(task) {
     }
     return { ...element };
   })
-  saveValue(newArray);
+  saveTasks(newArray);
   return newArray;
 }
 
-function removeValue(id) {
+function removeTask(id) {
   let todoList = getTasks();
   let newArray = todoList.filter((element) => id !== element.id);
-  saveValue(newArray)
+  saveTasks(newArray)
   return newArray;
 }
 
-function removeMutilValue(arrayID) {
+function removeMutilTask(arrayID) {
   let taskList = getTasks();
   let newArray = taskList.filter((element) => !arrayID.includes(element.id));
-  saveValue(newArray);
+  saveTasks(newArray);
   return newArray;
 }
 
 function searchTask(str) {
   let taskList = getTasks();
   let newArray = taskList.filter((element) => element.taskName.toLowerCase().match(str.toLowerCase()))
-  console.log(`------- newArray ------- searchTask`);
-  console.log(newArray);
-  console.log(`------- newArray ------- searchTask`);
+  return newArray;
 }
 
 export {
   getTasks,
   createTask,
-  removeValue,
-  removeMutilValue,
+  removeTask,
+  removeMutilTask,
   updateTask,
   searchTask,
 };
